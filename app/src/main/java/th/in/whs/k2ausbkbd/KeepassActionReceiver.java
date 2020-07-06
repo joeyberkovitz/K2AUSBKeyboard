@@ -78,10 +78,11 @@ public class KeepassActionReceiver extends PluginActionBroadcastReceiver {
                 Layout layoutInstance = KeyboardLayoutFactory.getLayout(layout);
                 Keyboard.getInstance().type(type.toString(), layoutInstance);
             } catch (IOException | InstantiationException | IllegalAccessException e) {
-                Toast.makeText(null, R.string.error_send, Toast.LENGTH_LONG).show();
+                //Toast.makeText(null, R.string.error_send, Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             } catch (UnsupportedOperationException e) {
-                Toast.makeText(null, R.string.error_kernel, Toast.LENGTH_LONG).show();
+                //Toast.makeText(null, R.string.error_kernel, Toast.LENGTH_LONG).show();
+                e.printStackTrace();
             }
         }
     }

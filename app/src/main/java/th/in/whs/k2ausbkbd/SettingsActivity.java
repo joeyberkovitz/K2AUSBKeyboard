@@ -11,9 +11,13 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 
 import keepass2android.pluginsdk.Strings;
+import th.in.whs.k2ausbkbd.hid.Keyboard;
+import th.in.whs.k2ausbkbd.layout.KeyboardLayoutFactory;
+import th.in.whs.k2ausbkbd.layout.Layout;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -73,6 +77,23 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
                 return true;
             }
         });
+
+
+        Preference testPref = findPreference("test_plugin_pref");
+        testPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                try {
+                    Log.d("Settings", "Initializing KB");
+                    Layout layoutInstance = KeyboardLayoutFactory.getLayout("QWERTY");
+                    Keyboard.getInstance().type("TEST TEXT", layoutInstance);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        });
+
     }
 
     @Override

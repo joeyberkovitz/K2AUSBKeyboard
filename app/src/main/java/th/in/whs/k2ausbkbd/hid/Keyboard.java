@@ -1,8 +1,15 @@
 package th.in.whs.k2ausbkbd.hid;
 
+import android.util.Log;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
 
 import th.in.whs.k2ausbkbd.layout.*;
 
@@ -12,6 +19,8 @@ public class Keyboard {
     public static final String DEVICE = "/dev/hidg0";
 
     private Process process;
+    private BufferedReader reader;
+    private static final String LOG_TAG = "KeyboardShell";
 
     protected Keyboard() throws UnsupportedOperationException {
         if(!new File(DEVICE).exists()){
@@ -19,17 +28,40 @@ public class Keyboard {
         }
 
         try {
-            process = Runtime.getRuntime().exec(new String[]{
-                    "su",
-                    "-c",
-                    "sh"
-            });
+            process = new ProcessBuilder()
+                    .command("su", "-c", "sh")
+                    .start();
+
+            inheritIO(process.getInputStream());
+            inheritIO(process.getErrorStream());
+
+            if(!process.isAlive()){
+                Log.d(LOG_TAG, "Process died with error: " + process.exitValue());
+            }
+
+            Log.d(LOG_TAG, "Process Started");
+            //process = Runtime.getRuntime().exec(new String[]{"su", "-c", "sh"});
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void close(){
+    private static void inheritIO(final InputStream src){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(LOG_TAG, "Starting scanner");
+                Scanner sc = new Scanner(src);
+                while(sc.hasNextLine()){
+                    Log.d(LOG_TAG, sc.nextLine());
+                }
+            }
+        }).start();
+    }
+
+    public void close() throws IOException {
+        if(reader != null)
+           reader.close();
         process.destroy();
     }
 
@@ -40,6 +72,7 @@ public class Keyboard {
 
             sendChar(typeChar, layout);
         }
+        //logRes();
     }
 
     private void sendChar(char data, Layout layout) throws IOException {
@@ -60,7 +93,22 @@ public class Keyboard {
         OutputStream stdin = process.getOutputStream();
         stdin.write(("echo -ne " + bytesToEcho(bytes) + " > " + DEVICE + "\n").getBytes());
         stdin.flush();
-    }
+   }
+
+   private void logRes(){
+        if(reader == null){
+            reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        }
+        try {
+            String line = "";
+            while ((line = reader.readLine()) != null){
+                Log.d("KeyboardRes", line);
+            }
+        }
+        catch (IOException ioerr){
+            ioerr.printStackTrace();
+        }
+   }
 
     private void keyUp() throws IOException {
         OutputStream stdin = process.getOutputStream();

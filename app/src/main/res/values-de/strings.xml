@@ -7,6 +7,7 @@
     <string name="kp2aplugin_author">Manatsawin Hanmongkolchai</string>
 
     <string name="enable_plugin">Keepass2Android-Plugin aktivieren</string>
+    <string name="test_plugin">TEST PLUGIN</string>
     <string name="type_user_pass">Benutzername/Passwort über USB eingeben</string>
     <string name="type_user_pass_enter">Benutzername/Passwort/Enter über USB eingeben</string>
     <string name="hide_launcher">Im Launcher verstecken</string>

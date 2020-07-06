@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/K2AUSBKeyboard.iml" filepath="$PROJECT_DIR$/.idea/modules/K2AUSBKeyboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/K2AUSBKeyboard-app.iml" filepath="$PROJECT_DIR$/app/K2AUSBKeyboard-app.iml" group="K2AUSBKeyboard/app" />
+      <module fileurl="file://$PROJECT_DIR$/keepass2AndroidPluginSDK/K2AUSBKeyboard-keepass2AndroidPluginSDK.iml" filepath="$PROJECT_DIR$/keepass2AndroidPluginSDK/K2AUSBKeyboard-keepass2AndroidPluginSDK.iml" group="K2AUSBKeyboard/keepass2AndroidPluginSDK" />
+      <module fileurl="file://$PROJECT_DIR$/Projects-K2AUSBKeyboard.iml" filepath="$PROJECT_DIR$/Projects-K2AUSBKeyboard.iml" group="K2AUSBKeyboard" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/keepass2AndroidPluginSDK/keepass2AndroidPluginSDK.iml" filepath="$PROJECT_DIR$/.idea/modules/keepass2AndroidPluginSDK/keepass2AndroidPluginSDK.iml" />
     </modules>

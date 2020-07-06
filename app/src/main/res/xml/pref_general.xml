@@ -1,8 +1,17 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
+        android:id="@+id/preference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:key="enable_plugin_pref"
         android:title="@string/enable_plugin" />
+    <Preference
+        android:id="@+id/testPref"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:key="test_plugin_pref"
+        android:title="@string/test_plugin" />
 
     <CheckBoxPreference
         android:key="hide_from_launcher"
